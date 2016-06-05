@@ -26,6 +26,8 @@ def buildings():
             pnt = list(shape(bldg['geometry']).centroid.coords[0])
             pnt.reverse()
             loc = geocoder.osm(pnt, method="reverse").json
+            if 'osm_id' not in loc:
+                continue
             loc['name'] = loc['osm_id']
             fields_to_remove = ['encoding', 'status_code', 'confidence', 'provider', 'accuracy', 'status', 'importance',
                                 'icon', 'osm_type', 'place_rank', 'lat', 'lng']
